@@ -1,0 +1,650 @@
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding-top: 80px;
+    }
+
+    /* Header Styling */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        background-color: #f8f9fa;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+        z-index: 1000;
+        box-sizing: border-box;
+    }
+
+    .logo img {
+        height: 60px;
+    }
+
+    .nav-menu ul {
+        list-style: none;
+        display: flex;
+        gap: 40px;
+        margin: 0;
+    }
+
+    /* --- NAVIGATION LINK STYLES (FOR DESKTOP & MOBILE) --- */
+    .nav-menu a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 800;
+        padding-bottom: 5px;
+        border-bottom: 2px solid transparent; /* Prepare for the underline effect */
+        transition: color 0.3s, border-bottom-color 0.3s;
+    }
+
+    /* This single rule handles BOTH hover and the active highlight */
+    .nav-menu a:hover,
+    .nav-menu a.active {
+        color: #8e44ad; /* The purple highlight color */
+        border-bottom-color: #8e44ad; /* Makes the underline appear */
+    }
+
+
+    /* Home Section Video */
+    #home {
+        position: relative;
+        height: calc(100vh - 80px);
+        overflow: hidden;
+    }
+
+    .video-background, #heroVideo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .video-background {
+        background-color: #000;
+        z-index: -2;
+    }
+
+    #heroVideo {
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    /* Hamburger (Hidden on Desktop) */
+    .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 1200;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+    }
+
+    /*
+    ======================================================
+        STYLING FOR THE NEW "ABOUT US" SECTION
+    ======================================================
+    */
+
+    #about {
+        background-color: #ffffff; /* A clean white background */
+        padding: 80px 50px;
+        overflow: hidden; /* Important for containing animations */
+    }
+
+    .about-container {
+        display: flex;
+        align-items: center;
+        gap: 60px; /* Space between content and image */
+        max-width: 1200px;
+        margin: 0 auto; /* Center the container */
+    }
+
+    .about-content {
+        flex: 1; /* Takes up half the space */
+    }
+
+    .about-image {
+        flex: 1; /* Takes up the other half */
+    }
+
+    /* Styling the text elements */
+    #about h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 30px;
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Adds a decorative underline */
+    #about h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60%;
+        height: 4px;
+        background-color: #8e44ad; /* Purple accent color */
+    }
+
+    #about h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #8e44ad; /* Purple accent color */
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+
+    #about p {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.7; /* Improves readability */
+    }
+
+    /* Styling for the new button */
+    .about-cta {
+        display: inline-block;
+        margin-top: 20px;
+        background-color: #333;
+        color: #fff;
+        padding: 12px 25px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .about-cta:hover {
+        background-color: #8e44ad;
+        transform: translateY(-3px);
+    }
+
+    /* Styling for the image */
+    .about-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+
+    /* --- ANIMATION STYLES (for the fade-in effect) --- */
+    .about-content, .about-image {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    /* This class will be added by JavaScript when the section is visible */
+    .about-content.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .about-image.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s; /* Makes the image appear slightly after the text */
+    }
+
+
+    /* --- Making the About Section Responsive --- */
+    @media (max-width: 768px) {
+        #about {
+            padding: 60px 20px;
+        }
+
+        .about-container {
+            flex-direction: column; /* Stack content and image on mobile */
+            gap: 40px;
+        }
+    }
+
+
+    /*
+    ======================================================
+        STYLING FOR THE NEW "PHOTOS" SECTION
+    ======================================================
+    */
+
+    #photos {
+        padding: 80px 50px;
+        background-color: #f8f9fa; /* Light grey background to match the header */
+    }
+
+    /* --- Section Heading --- */
+    .photos-heading {
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative; /* Ensure relative positioning for pseudo-elements */
+    }
+
+    .photos-heading h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+        position: relative; /* Needed for ::after to position relative to h2 */
+        display: inline-block; /* So underline matches text width */
+    }
+
+    .photos-heading h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 70%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 4px;
+        background-color: #8e44ad; /* Purple accent color */
+        border-radius: 2px;
+    }
+
+    .photos-heading p {
+        font-size: 1.1rem;
+        color: #666;
+    }
+
+    /* --- Main Gallery Container --- */
+    .gallery-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two equal columns */
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* --- Column Styling --- */
+    .gallery-column-left {
+        display: grid;
+        grid-template-rows: auto auto; /* Two rows that fit their content */
+        gap: 20px;
+    }
+
+    .gallery-column-right {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* --- Text Block Styling (Right Column) --- */
+    .gallery-text-block {
+        background-color: #edebe8; /* The beige background from the image */
+        padding: 40px;
+        text-align: left;
+        border-radius: 10px;
+    }
+
+    .gallery-text-block h3 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #4a5c4f; /* Dark green from the image */
+        margin: 0;
+    }
+
+    .gallery-text-block h4 {
+        font-size: 1.2rem;
+        color: #8a79d6;
+        letter-spacing: 4px; /* Wide spacing like "Photographer" */
+        margin: 5px 0 20px 0;
+        text-transform: uppercase;
+    }
+
+    .gallery-text-block p {
+        background-color: #d3ccc7;
+        color: #5675dc;
+        padding: 10px 15px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    /* --- Small Grid Styling (Right Column) --- */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 20px;
+    }
+
+    /* --- Individual Image Item Styling & Hover Effect --- */
+    .gallery-item {
+        border-radius: 10px;
+        overflow: hidden; /* Crucial for containing the scaled image on hover */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Prevents images from stretching */
+        display: block;
+        transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.05); /* Zoom in effect */
+        filter: brightness(1.08); /* Makes image slightly brighter */
+    }
+
+
+    /* --- ANIMATION STYLES --- */
+    .gallery-item {
+        opacity: 0;
+        transform: translateY(25px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .gallery-item.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+    /* --- RESPONSIVE STYLES --- */
+    @media (max-width: 992px) {
+        .gallery-container {
+            grid-template-columns: 1fr; /* Stack columns on tablets and mobile */
+        }
+    }
+
+    @media (max-width: 768px) {
+        #photos {
+            padding: 60px 20px;
+        }
+    }
+
+    /*
+    ======================================================
+        STYLING FOR THE NEW "CONTACT US" SECTION
+    ======================================================
+    */
+    #contact {
+        background-color: #f8f9fa; /* Light grey background */
+    }
+
+    .contact-container {
+        display: flex;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: stretch; /* Makes columns equal height */
+    }
+
+    /* --- Left Column: Details Panel --- */
+    .contact-details {
+        flex: 1;
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-details h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .contact-subheading {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 40px;
+    }
+
+    .contact-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    /*
+    ======================================================
+        UPDATED ICON STYLING (USING FONT AWESOME)
+    ======================================================
+    */
+    /*
+    ======================================================
+        STYLING FOR "CONTACT US" SECTION
+    ======================================================
+    */
+    #contact {
+        background-color: #f8f9fa;
+        padding: 80px 50px;
+    }
+
+    .contact-container {
+        display: flex;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: stretch;
+    }
+
+    /* --- Left Column: Details Panel --- */
+    .contact-details {
+        flex: 1;
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-details h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin: 0 0 10px 0;
+    }
+
+    .contact-subheading {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 40px;
+    }
+
+    .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 25px;
+    }
+
+    .contact-icon {
+        flex-shrink: 0;
+        width: 30px; /* Aligned icon with text */
+        text-align: left;
+        margin-right: 20px;
+    }
+
+    .contact-icon i {
+        font-size: 22px;
+        color: #8e44ad; /* Your website's purple accent */
+        margin-top: 5px;
+    }
+
+    .contact-text h4 {
+        margin: 0 0 5px 0;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #333;
+    }
+
+    .contact-text p {
+        margin: 0;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    .contact-text a {
+        color: #d63384; /* Stand-out reddish-pink for links */
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .contact-text a:hover {
+        text-decoration: underline;
+    }
+
+    .contact-button {
+        display: inline-block;
+        margin-top: 20px;
+        background-color: #1237f3;
+        color: #fff;
+        padding: 14px 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 700;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .contact-button:hover {
+        background-color: #0c26a9;
+        transform: translateY(-3px);
+    }
+
+    /* --- Right Column: Map --- */
+    .map-container {
+        flex: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        min-height: 500px;
+    }
+
+    .map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    /* --- Animation for the Contact Section --- */
+    .contact-details,
+    .map-container {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .contact-details.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .map-container.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    /* --- Responsive for Contact Section --- */
+    @media (max-width: 992px) {
+        #contact {
+            padding: 60px 20px;
+        }
+        .contact-container {
+            flex-direction: column;
+        }
+    }
+
+
+    /* Other Sections & Footer */
+    section {
+        padding: 60px 50px;
+    }
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #333;
+        color: white;
+    }
+
+
+    /* 
+    ======================================================
+    RESPONSIVE DESIGN FOR MOBILE & TABLETS (BELOW 768px)
+    ======================================================
+    */
+    @media (max-width: 768px) {
+        body {
+            padding-top: 70px;
+        }
+
+        header {
+            height: 70px;
+            padding: 0 20px;
+        }
+
+        /* --- FIX: Styles for the slide-in panel --- */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            margin-top: 74px;
+            right: -100%; /* Start off-screen */
+            width: 180px; /* A more standard width */
+            height: 40vh; /* Full screen height */
+            background-color: #ffffff;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1100;
+            transition: right 0.4s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Removed margin-top and padding-right for a cleaner look */
+        }
+
+        .nav-menu.open {
+            right: 0;
+        }
+
+        .nav-menu ul {
+            flex-direction: column;
+            text-align: center;
+            gap: 30px; /* Increased gap for easier tapping */
+        }
+
+        .nav-menu a {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .hamburger {
+            display: flex;
+        }
+
+        /* --- FIX: Overlay background-color is now active --- */
+        #menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 50%;
+            /* background-color: rgba(0, 0, 0, 0.5); This was the missing background */
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s, visibility 0.4s;
+        }
+        
+        #menu-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
